@@ -72,8 +72,10 @@ console.log(await sum([1, 2 ,3]))
 // output 6
 ```
 
+* _Versioning_
 
-
+All `ai-fun` modules started with version 1 and follows [semantic versioning](https://semver.org/).
+All major version bumping will happen at the same time for all of the modules.
 
 
 
