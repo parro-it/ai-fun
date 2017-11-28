@@ -13,6 +13,11 @@ A collection of modules to easy deal with async iterables
 * [is-async-iterable](https://github.com/parro-it/is-async-iterable) - Checks if a given object is async iterable.
 * [ai-reduce](https://github.com/parro-it/ai-reduce) - Reduce for async iterables.
 * [ai-node](https://github.com/parro-it/ai-node) - Node wrappers that returns async iterables and promises.
+* [ai-map](https://github.com/parro-it/ai-map) - Map over async iterables.
+* [ai-asfullfills](https://github.com/parro-it/ai-asfullfills) - Return an aync iterable that emit a series promises as they fullfills.
+* [ai-sequence](https://github.com/parro-it/ai-sequence) - Serial  merge of multiple async iterable.
+* [ai-merge](https://github.com/parro-it/ai-merge) - Parallel merge of multiple async iterable.
+
 
 # Common conventions
 
@@ -77,9 +82,10 @@ console.log(await sum([1, 2 ,3]))
 All `ai-fun` modules started with version 1 and follows [semantic versioning](https://semver.org/).
 All major version bumping will happen at the same time for all of the modules.
 
+* _Iteration lazyness_
 
-
-
+for await vs map -> lower order iterables are iterated only when needed
+(optionally?)
 
 
 
