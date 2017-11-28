@@ -3,30 +3,36 @@ import lines from "ai-lines";
 import concat from "ai-concat";
 import map from "ai-map";
 import filter from "ai-filter";
+import asfullfills from "ai-asfullfills";
 import execa from "execa";
+import compose from "compose-function";
+import props from "p-props";
 
-const moduleLines = lines(
-  fs.readFile(`${__dirname}/../../scripts/module-list`, "utf8")
-);
+const moduleLines = file => lines(fs.readFile(file, "utf8"));
+const nonEmpty = filter.with(line => {
+  return line !== "";
+});
 
-const moduleNames = filter(Boolean, moduleLines);
+const readModuleNamesFromFile = compose(concat.obj, nonEmpty, moduleLines);
 
-const infos = map(moduleNames, name => {
+const buildDescriptor = name => {
   const description = execa("npm", ["view", name, "description"]).then(
     p => p.stdout
   );
   const homepage = execa("npm", ["view", name, "homepage"]).then(p => p.stdout);
-  return Promise.all([description, homepage, name]);
-});
+  return props({ description, homepage, name });
+};
 
-const objs = map(infos, ([description, homepage, name]) => {
-  return { description, homepage, name };
-});
+async function awesomeLines() {
+  const moduleNames = await readModuleNamesFromFile(
+    `${__dirname}/../../scripts/module-list`
+  );
 
-const awesomeLines = map(objs, ({ description, homepage, name }) => {
-  return `* [${name}](${homepage}) - ${description}`;
-});
+  const moduleDescriptors = asfullfills(moduleNames.map(buildDescriptor));
 
-concat.obj(awesomeLines).then(lines => {
-  console.log(lines.join("\n"));
-});
+  map(moduleDescriptors, ({ description, homepage, name }) => {
+    console.log(`* [${name}](${homepage}) - ${description}`);
+  });
+}
+
+awesomeLines().catch(err => console.error(err));
