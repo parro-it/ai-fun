@@ -7,7 +7,6 @@ ai-sequence
 ai-filter
 ai-map
 ai-concat
-ai-template
 ai-asfullfills
 ai-from-stream
 is-async-iterable

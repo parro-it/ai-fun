@@ -1,0 +1,29 @@
+{
+  "name": "awesome-line",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andrea Parodi <andrea@parro.it>",
+  "license": "MIT",
+  "dependencies": {
+    "@std/esm": "^0.17.2",
+    "ai-concat": "^1.3.0",
+    "ai-filter": "^1.1.1",
+    "ai-lines": "^1.1.1",
+    "ai-map": "^1.1.0",
+    "ai-node": "^0.1.1",
+    "execa": "^0.8.0"
+  },
+  "@std/esm": {
+    "esm": "js",
+    "cjs": true
+  },
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "linterjs": "^1.11.0"
+  }
+}
