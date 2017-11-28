@@ -13,26 +13,32 @@ const nonEmpty = filter.with(line => {
   return line !== "";
 });
 
-const readModuleNamesFromFile = compose(concat.obj, nonEmpty, moduleLines);
-
 const buildDescriptor = name => {
   const description = execa("npm", ["view", name, "description"]).then(
     p => p.stdout
   );
   const homepage = execa("npm", ["view", name, "homepage"]).then(p => p.stdout);
-  return props({ description, homepage, name });
+  return { description, homepage, name };
 };
 
-async function awesomeLines() {
-  const moduleNames = await readModuleNamesFromFile(
-    `${__dirname}/../../scripts/module-list`
-  );
-
-  const moduleDescriptors = asfullfills(moduleNames.map(buildDescriptor));
-
-  map(moduleDescriptors, ({ description, homepage, name }) => {
+const logLines = async iterable =>
+  map(await iterable, ({ description, homepage, name }) => {
     console.log(`* [${name}](${homepage}) - ${description}`);
   });
+
+const awaitDescriptors = async iterable =>
+  asfullfills((await concat.obj(iterable)).map(props));
+
+const readModules = compose(
+  logLines,
+  awaitDescriptors,
+  map.with(buildDescriptor),
+  nonEmpty,
+  moduleLines
+);
+
+async function awesomeLines() {
+  await readModules(`${__dirname}/../../scripts/module-list`);
 }
 
 awesomeLines().catch(err => console.error(err));
