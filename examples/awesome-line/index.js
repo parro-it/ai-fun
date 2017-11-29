@@ -13,11 +13,11 @@ const filterNonEmpty = filter.with(line => {
   return line !== "";
 });
 
+const runNpm = args => execa("npm", args).then(p => p.stdout);
+
 const buildDescriptor = name => {
-  const description = execa("npm", ["view", name, "description"]).then(
-    p => p.stdout
-  );
-  const homepage = execa("npm", ["view", name, "homepage"]).then(p => p.stdout);
+  const description = runNpm(["view", name, "description"]);
+  const homepage = runNpm(["view", name, "homepage"]);
   return { description, homepage, name };
 };
 
@@ -26,10 +26,11 @@ const logLine = ({ description, homepage, name }) => {
 };
 
 const awaitDescriptors = async iterable =>
-  asfullfills((await concat.obj(iterable)).map(props));
+  (await concat.obj(iterable)).map(props);
 
 const readModules = compose(
   map.with(logLine),
+  asfullfills,
   awaitDescriptors,
   map.with(buildDescriptor),
   filterNonEmpty,
