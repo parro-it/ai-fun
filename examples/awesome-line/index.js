@@ -8,8 +8,8 @@ import execa from "execa";
 import compose from "compose-function";
 import props from "p-props";
 
-const moduleLines = file => lines(fs.readFile(file, "utf8"));
-const nonEmpty = filter.with(line => {
+const readModuleNamesFromFile = file => lines(fs.readFile(file, "utf8"));
+const filterNonEmpty = filter.with(line => {
   return line !== "";
 });
 
@@ -21,20 +21,19 @@ const buildDescriptor = name => {
   return { description, homepage, name };
 };
 
-const logLines = async iterable =>
-  map(await iterable, ({ description, homepage, name }) => {
-    console.log(`* [${name}](${homepage}) - ${description}`);
-  });
+const logLine = ({ description, homepage, name }) => {
+  console.log(`* [${name}](${homepage}) - ${description}`);
+};
 
 const awaitDescriptors = async iterable =>
   asfullfills((await concat.obj(iterable)).map(props));
 
 const readModules = compose(
-  logLines,
+  map.with(logLine),
   awaitDescriptors,
   map.with(buildDescriptor),
-  nonEmpty,
-  moduleLines
+  filterNonEmpty,
+  readModuleNamesFromFile
 );
 
 async function awesomeLines() {
