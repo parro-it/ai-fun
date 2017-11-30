@@ -7,6 +7,19 @@ import asfullfills from "ai-asfullfills";
 import execa from "execa";
 import compose from "compose-function";
 import props from "p-props";
+import { resolve } from "path";
+import { unthisAll } from "unthis";
+import fromStream from "ai-from-stream";
+import log from "ai-log";
+
+const array = unthisAll(Array.prototype);
+const programArgs = array.slice(2, undefined);
+const configArg = array.find(arg => arg.startsWith("--config="));
+const filterModuleNames = array.filter(arg => !arg.startsWith("--"));
+
+const readConfigValue = option => option && option.split("=")[1];
+const configFile = compose(readConfigValue, configArg, programArgs);
+const moduleNameArgs = compose(filterModuleNames, programArgs);
 
 const readModuleNamesFromFile = file => lines(fs.readFile(file, "utf8"));
 const filterNonEmpty = filter.with(line => {
@@ -32,13 +45,40 @@ const readModules = compose(
   map.with(logLine),
   asfullfills,
   awaitDescriptors,
-  map.with(buildDescriptor),
+  map.with(buildDescriptor)
+);
+
+const readModulesFromConfig = compose(
+  readModules,
   filterNonEmpty,
   readModuleNamesFromFile
 );
 
+const decodeFrom = encoding => map.with(chunk => chunk.toString(encoding));
+const decode = (iterable, encoding) => decodeFrom(encoding)(iterable);
+decode.with = decodeFrom;
+
+const readModulesFromStream = compose(
+  readModules,
+  // log("filterNonEmpty"),
+  filterNonEmpty,
+  lines,
+  decode.with("utf8"),
+  // log("fromStream"),
+  fromStream
+);
+
+const readModulesFromArgs = compose(readModules, moduleNameArgs);
+
 async function awesomeLines() {
-  await readModules(`${__dirname}/../../scripts/module-list`);
+  const config = configFile(process.argv);
+  if (config) {
+    readModulesFromConfig(resolve(config));
+  }
+
+  readModulesFromArgs(process.argv);
+
+  readModulesFromStream(process.stdin);
 }
 
 awesomeLines().catch(err => console.error(err));
