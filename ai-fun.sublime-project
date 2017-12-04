@@ -1,0 +1,62 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/parro-it/repos/asynciterable"
+		},
+		{
+			"path": "/home/parro-it/repos/linterjs"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-from-stream"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-template"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-concat"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-event"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-filter"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-lines"
+		},
+		{
+			"path": "/home/parro-it/repos/is-async-iterable"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "/home/parro-it/repos/ai-reduce"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-node"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-map"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-asfullfills"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-sequence"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-merge"
+		},
+		{
+			"path": "/home/parro-it/repos/tappo"
+		},
+		{
+			"path": "/home/parro-it/repos/bash-parser"
+		},
+		{
+			"path": "/home/parro-it/repos/ai-log"
+		}
+	]
+}

@@ -10,7 +10,7 @@ import props from "p-props";
 import { resolve } from "path";
 import { unthisAll } from "unthis";
 import fromStream from "ai-from-stream";
-import log from "ai-log";
+// import log from "ai-log";
 
 const array = unthisAll(Array.prototype);
 const programArgs = array.slice(2, undefined);

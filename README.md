@@ -4,19 +4,22 @@ A collection of modules to easy deal with async iterables
 
 # Modules list
 
-* [asynciterable](https://github.com/parro-it/asynciterable) - Basic async iterable class with buffer.
-* [ai-concat](https://github.com/parro-it/ai-concat) - Concat an async iterable into a promise.
-* [ai-from-stream](https://github.com/parro-it/ai-from-stream) - create an async iterable from a stream.
-* [ai-event](https://github.com/parro-it/ai-event) - Create an async iterable from an event emitter.
-* [ai-filter](https://github.com/parro-it/ai-filter) - Filter over async iterables.
-* [ai-lines](https://github.com/parro-it/ai-lines) - Split an async iterable into lines.
-* [is-async-iterable](https://github.com/parro-it/is-async-iterable) - Checks if a given object is async iterable.
-* [ai-reduce](https://github.com/parro-it/ai-reduce) - Reduce for async iterables.
-* [ai-node](https://github.com/parro-it/ai-node) - Node wrappers that returns async iterables and promises.
-* [ai-map](https://github.com/parro-it/ai-map) - Map over async iterables.
-* [ai-asfullfills](https://github.com/parro-it/ai-asfullfills) - Return an aync iterable that emit a series promises as they fullfills.
-* [ai-sequence](https://github.com/parro-it/ai-sequence) - Serial  merge of multiple async iterable.
-* [ai-merge](https://github.com/parro-it/ai-merge) - Parallel merge of multiple async iterable.
+* [ai-event](https://github.com/parro-it/ai-event#readme) - Create an async iterable from an event emitter.
+* [ai-node](https://github.com/parro-it/ai-node#readme) - Node wrappers that returns async iterables and promises.
+* [ai-asfullfills](https://github.com/parro-it/ai-asfullfills#readme) - Return an aync iterable that emit a series promises as they fullfills
+* [ai-merge](https://github.com/parro-it/ai-merge#readme) - Parallel merge of multiple async iterable.
+* [ai-filter](https://github.com/parro-it/ai-filter#readme) - Filter over async iterables.
+* [ai-lines](https://github.com/parro-it/ai-lines#readme) - Split an async iterable into lines.
+* [ai-map](https://github.com/parro-it/ai-map#readme) - Map over async iterables
+* [ai-sequence](https://github.com/parro-it/ai-sequence#readme) - Serial  merge of multiple async iterable.
+* [ai-concat](https://github.com/parro-it/ai-concat#readme) - Concat an async iterable into a promise
+* [ai-reduce](https://github.com/parro-it/ai-reduce#readme) - Reduce for async iterables.
+* [asynciterable](https://github.com/parro-it/asynciterable#readme) - Async iterable class
+* [ai-from-stream](https://github.com/parro-it/ai-from-stream#readme) - create an async iterable from a stream
+* [ai-log](https://github.com/parro-it/ai-log#readme) - Tap into an async iterable pipeline and log all chunks passing through
+* [ai-tap](https://github.com/parro-it/ai-tap#readme) - Tap into an async iterable chain without affecting its value or state.
+* [is-async-iterable](https://github.com/parro-it/is-async-iterable#readme) - Checks if a given object is async iterable.
+
 
 
 # Common conventions

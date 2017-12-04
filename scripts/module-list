@@ -11,3 +11,5 @@ ai-asfullfills
 ai-from-stream
 is-async-iterable
 asynciterable
+ai-log
+ai-tap
